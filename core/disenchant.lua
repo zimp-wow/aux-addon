@@ -34,9 +34,19 @@ local WEAPON = aux.set(
 )
 
 function M.value(slot, quality, level)
+	return value_ext(slot, quality, level, false)
+end
+
+function M.value_ext(slot, quality, level, daily)
     local expectation
     for _, event in pairs(distribution(slot, quality, level)) do
-        local value = history.value(event.item_id .. ':' .. 0)
+        local value = 0
+	local item_key = event.item_id .. ':' .. 0
+	if daily then 
+		value = history.value(item_key)
+	else
+		value = history.market_value(item_key)
+	end
         expectation = (expectation or 0) + event.probability * (event.min_quantity + event.max_quantity) / 2 * (value or 0)
     end
     return expectation

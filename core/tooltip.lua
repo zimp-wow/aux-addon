@@ -77,6 +77,11 @@ function extend_tooltip(tooltip, link, quantity)
             if settings.disenchant_value then
                 local disenchant_value = disenchant.value(item_info.slot, item_info.quality, item_info.level)
                 tooltip:AddLine('Disenchant: ' .. (disenchant_value and money.to_string2(disenchant_value) or UNKNOWN), aux.color.tooltip.disenchant.value())
+
+	    	if settings.daily then
+            	    local daily_value = disenchant.value_ext(item_info.slot, item_info.quality, item_info.level, true)
+            	    tooltip:AddLine('Disenchant Daily: ' .. (daily_value and money.to_string2(daily_value) .. ' (' .. gui.percentage_historical(aux.round(daily_value / disenchant_value * 100)) .. ')' or UNKNOWN), aux.color.tooltip.disenchant.value())
+	    	end
             end
         end
     end

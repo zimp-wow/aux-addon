@@ -258,8 +258,8 @@ do
 		filter_display:SetText(text)
 	end
 	function filter_display_size()
-		local font, font_size = filter_display:GetFont()
-		filter_display.measure:SetFont(font, font_size)
+		local font, font_size, flags = filter_display:GetFont('p')
+		filter_display.measure:SetFont(font, font_size, flags)
 		local lines = 0
 		local width = 0
 		for line in string.gmatch(text, '<p>(.-)</p>') do

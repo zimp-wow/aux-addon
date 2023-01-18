@@ -195,7 +195,7 @@ function game_tooltip_hooks.SetQuestLogItem(qtype, slot)
 end
 
 function game_tooltip_hooks.SetBagItem(bag, slot)
-    local link = GetContainerItemLink(bag, slot)
+    local link = C_Container.GetContainerItemLink(bag, slot)
     if link then
         extend_tooltip(GameTooltip, link, select(2, GetContainerItemInfo(bag, slot)))
     end
